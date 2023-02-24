@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -13,9 +14,6 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        $faker = \Faker\Factory::create();
-        DB::table('categories')->insert([
-            'name' => $faker->city()
-        ]);
+        Category::factory()->count(10)->create();
     }
 }
