@@ -22,6 +22,7 @@ class StoreItemRequest extends FormRequest
     public function rules(): array
     {
         return [
+            "category_id" => 'required|max:256|integer',
             "name" => 'required|max:256',
             "price" => 'required|max:256|integer',
         ];

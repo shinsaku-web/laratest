@@ -1,14 +1,12 @@
-import { Box, Button, Heading } from "@chakra-ui/react";
+import { Box, Button, Heading, useToast } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import {
     Table,
     Thead,
     Tbody,
-    Tfoot,
     Tr,
     Th,
     Td,
-    TableCaption,
     TableContainer,
 } from "@chakra-ui/react";
 import { AddIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons";
@@ -18,12 +16,30 @@ import { Item } from "../../types/types";
 
 export const ItemIndexPage = () => {
     const navigate = useNavigate();
+    const toast = useToast();
 
-    const handleClickEdit = () => {
-        navigate("/item/edit/1");
+    const handleClickEdit = (id: string) => {
+        navigate("/item/edit/" + id);
     };
-    const handleClickDelete = () => {
-        alert("delete");
+    const handleClickDelete = async (id: string) => {
+        if (confirm("Really?")) {
+            try {
+                await axiosBase.delete("/item/" + id);
+                await getList();
+                toast({
+                    title: `削除しました。`,
+                    status: "success",
+                    isClosable: true,
+                });
+            } catch (error) {
+                console.error(error);
+                toast({
+                    title: `削除に失敗しました`,
+                    status: "error",
+                    isClosable: true,
+                });
+            }
+        }
     };
 
     const [list, setList] = useState<Item[]>([]);
@@ -85,13 +101,21 @@ export const ItemIndexPage = () => {
                                         <Td isNumeric>{item.price}</Td>
                                         <Td textAlign={"center"}>
                                             <EditIcon
-                                                onClick={handleClickEdit}
+                                                onClick={() =>
+                                                    handleClickEdit(
+                                                        String(item.id)
+                                                    )
+                                                }
                                                 cursor={"pointer"}
                                             />
                                         </Td>
                                         <Td textAlign={"center"}>
                                             <DeleteIcon
-                                                onClick={handleClickDelete}
+                                                onClick={() =>
+                                                    handleClickDelete(
+                                                        String(item.id)
+                                                    )
+                                                }
                                                 cursor={"pointer"}
                                             />
                                         </Td>

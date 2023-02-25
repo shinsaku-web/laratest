@@ -11,7 +11,7 @@ class UpdateItemRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class UpdateItemRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "category_id" => 'required|integer',
+            "name" => 'required|max:256',
+            "price" => 'required|max:100000|integer',
         ];
     }
 }

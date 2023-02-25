@@ -45,6 +45,7 @@ class ItemController extends Controller
     {
         try {
             Item::findOrFail($id)->update([
+                "category_id" => $request->category_id,
                 "name" => $request->name,
                 "price" => $request->price,
             ]);

@@ -1,9 +1,18 @@
-import { Box, Button, Heading, Input, Text, useToast } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import {
+    Box,
+    Button,
+    Heading,
+    Input,
+    Text,
+    useToast,
+    useUpdateEffect,
+} from "@chakra-ui/react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { axiosBase } from "../../apis/axiosBase";
 
 type State = {
+    category_id: string;
     name: string;
     price: string;
 };
@@ -16,7 +25,11 @@ type ErrorState = {
 export const ItemCreatePage = () => {
     const navigate = useNavigate();
     const toast = useToast();
-    const [data, setData] = useState<State>({ name: "", price: "" });
+    const [data, setData] = useState<State>({
+        category_id: "1",
+        name: "",
+        price: "",
+    });
     const [error, setError] = useState<ErrorState>({
         name: false,
         price: false,
@@ -25,7 +38,7 @@ export const ItemCreatePage = () => {
     const handleCreate = async () => {
         if (error.name || error.price) {
             toast({
-                title: `error!`,
+                title: `入力内容に不備があります`,
                 status: "error",
                 isClosable: true,
             });
@@ -36,14 +49,14 @@ export const ItemCreatePage = () => {
             navigate("/item");
         } catch (error) {
             toast({
-                title: `error!`,
+                title: `作成に失敗しました`,
                 status: "error",
                 isClosable: true,
             });
         }
     };
 
-    useEffect(() => {
+    useUpdateEffect(() => {
         if (!data.name || data.name.length >= 256) {
             setError((prev) => ({ ...prev, name: true }));
         } else {

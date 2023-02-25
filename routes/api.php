@@ -24,10 +24,10 @@ Route::get("/item", [ItemController::class, "index"]);
 Route::post("/item", [ItemController::class, "store"]);
 Route::get("/item/{id}", [ItemController::class, "edit"]);
 Route::post("/item/{id}", [ItemController::class, "update"]);
-Route::delete("/item/{id}", [ItemController::class, "delete"]);
+Route::delete("/item/{id}", [ItemController::class, "destroy"]);
 
 Route::get("/category", [CategoryController::class, "index"]);
 Route::post("/category", [CategoryController::class, "store"]);
 Route::get("/category/{id}", [CategoryController::class, "edit"]);
 Route::post("/category/{id}", [CategoryController::class, "update"]);
-Route::delete("/category/{id}", [CategoryController::class, "delete"]);
+Route::delete("/category/{id}", [CategoryController::class, "destroy"]);
