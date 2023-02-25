@@ -17,6 +17,13 @@ export const CategoryIndexPage = () => {
     const navigate = useNavigate();
 
     const array = [...Array(100)].map((_, i) => i);
+
+    const handleClickEdit = () => {
+        alert("edit");
+    };
+    const handleClickDelete = () => {
+        alert("delete");
+    };
     return (
         <Box padding={"80px 0px"} position="relative">
             <Button
@@ -25,17 +32,18 @@ export const CategoryIndexPage = () => {
                 position={"fixed"}
                 top={10}
                 right={"120px"}
-                colorScheme="teal"
+                colorScheme="blue"
                 variant="solid"
             >
                 Item
             </Button>
             <Button
+                onClick={() => navigate("/category/create")}
                 size={"lg"}
                 position={"fixed"}
                 top={10}
                 right={"40px"}
-                colorScheme="teal"
+                colorScheme="blue"
                 variant="outline"
             >
                 <AddIcon />
@@ -61,22 +69,21 @@ export const CategoryIndexPage = () => {
                                         <Td>inches</Td>
                                         <Td>Category</Td>
                                         <Td textAlign={"center"}>
-                                            <EditIcon cursor={"pointer"}/>
+                                            <EditIcon
+                                                onClick={handleClickEdit}
+                                                cursor={"pointer"}
+                                            />
                                         </Td>
                                         <Td textAlign={"center"}>
-                                            <DeleteIcon cursor={"pointer"}/>
+                                            <DeleteIcon
+                                                onClick={handleClickDelete}
+                                                cursor={"pointer"}
+                                            />
                                         </Td>
                                     </Tr>
                                 )),
                             ]}
                         </Tbody>
-                        <Tfoot>
-                            <Tr>
-                                <Th>ID</Th>
-                                <Th>Name</Th>
-                                <Th isNumeric>Price</Th>
-                            </Tr>
-                        </Tfoot>
                     </Table>
                 </TableContainer>
             </Box>

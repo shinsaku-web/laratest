@@ -18,6 +18,13 @@ export const ItemIndexPage = () => {
     const navigate = useNavigate();
 
     const array = [...Array(100)].map((_, i) => i);
+
+    const handleClickEdit = () => {
+        navigate("/item/edit/1");
+    };
+    const handleClickDelete = () => {
+        alert("delete");
+    };
     return (
         <Box padding={"80px 0px"} position="relative">
             <Button
@@ -32,6 +39,7 @@ export const ItemIndexPage = () => {
                 Category
             </Button>
             <Button
+                onClick={() => navigate("/item/create")}
                 size={"lg"}
                 position={"fixed"}
                 top={10}
@@ -53,7 +61,7 @@ export const ItemIndexPage = () => {
                                 <Th>Category</Th>
                                 <Th>Name</Th>
                                 <Th isNumeric>Price</Th>
-                                 <Th textAlign={"center"}>Edit</Th>
+                                <Th textAlign={"center"}>Edit</Th>
                                 <Th textAlign={"center"}>Delete</Th>
                             </Tr>
                         </Thead>
@@ -66,22 +74,21 @@ export const ItemIndexPage = () => {
                                         <Td>millimetres (mm)</Td>
                                         <Td isNumeric>25.4</Td>
                                         <Td textAlign={"center"}>
-                                            <EditIcon cursor={"pointer"} />
+                                            <EditIcon
+                                                onClick={handleClickEdit}
+                                                cursor={"pointer"}
+                                            />
                                         </Td>
                                         <Td textAlign={"center"}>
-                                            <DeleteIcon cursor={"pointer"}/>
+                                            <DeleteIcon
+                                                onClick={handleClickDelete}
+                                                cursor={"pointer"}
+                                            />
                                         </Td>
                                     </Tr>
                                 )),
                             ]}
                         </Tbody>
-                        <Tfoot>
-                            <Tr>
-                                <Th>ID</Th>
-                                <Th>Name</Th>
-                                <Th isNumeric>Price</Th>
-                            </Tr>
-                        </Tfoot>
                     </Table>
                 </TableContainer>
             </Box>
