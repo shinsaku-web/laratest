@@ -17,17 +17,6 @@ class ItemController extends Controller
         return response()->json($items);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    // public function create()
-    // {
-    //     //
-    // }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreItemRequest $request)
     {
         try {
@@ -41,17 +30,6 @@ class ItemController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    // public function show(Item $item)
-    // {
-    //     //
-    // }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit($id)
     {
         try {
@@ -62,9 +40,6 @@ class ItemController extends Controller
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateItemRequest $request, $id)
     {
         try {
@@ -78,9 +53,6 @@ class ItemController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy($id)
     {
         try {
