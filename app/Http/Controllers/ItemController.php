@@ -55,7 +55,7 @@ class ItemController extends Controller
     public function edit($id)
     {
         try {
-            $item = Item::with("category")->firstOrFail($id);
+            $item = Item::with("category")->findOrFail($id);
             return response()->json($item);
         } catch (\Throwable $th) {
             return response()->json($th->getMessage(), $th->getCode());
