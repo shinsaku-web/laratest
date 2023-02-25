@@ -1,5 +1,5 @@
 import { Box, Button, Heading } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
     Table,
     Thead,
@@ -12,6 +12,8 @@ import {
 } from "@chakra-ui/react";
 import { AddIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
+import { Category } from "../../types/types";
+import { axiosBase } from "../../apis/axiosBase";
 
 export const CategoryIndexPage = () => {
     const navigate = useNavigate();
@@ -24,6 +26,14 @@ export const CategoryIndexPage = () => {
     const handleClickDelete = () => {
         alert("delete");
     };
+    const [categories, setCategories] = useState<Category[]>([]);
+    const getCategories = async () => {
+        const { data } = await axiosBase.get("/category");
+        setCategories(data);
+    };
+    useEffect(() => {
+        getCategories();
+    }, []);
     return (
         <Box padding={"80px 0px"} position="relative">
             <Button
@@ -64,10 +74,10 @@ export const CategoryIndexPage = () => {
                         </Thead>
                         <Tbody>
                             {[
-                                array.map((i) => (
-                                    <Tr key={i}>
-                                        <Td>inches</Td>
-                                        <Td>Category</Td>
+                                categories.map((category) => (
+                                    <Tr key={category.id}>
+                                        <Td>{category.id}</Td>
+                                        <Td>{category.name}</Td>
                                         <Td textAlign={"center"}>
                                             <EditIcon
                                                 onClick={handleClickEdit}

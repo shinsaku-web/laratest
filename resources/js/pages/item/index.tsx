@@ -1,5 +1,5 @@
 import { Box, Button, Heading } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
     Table,
     Thead,
@@ -13,6 +13,8 @@ import {
 } from "@chakra-ui/react";
 import { AddIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
+import { axiosBase } from "../../apis/axiosBase";
+import { Item } from "../../types/types";
 
 export const ItemIndexPage = () => {
     const navigate = useNavigate();
@@ -25,6 +27,16 @@ export const ItemIndexPage = () => {
     const handleClickDelete = () => {
         alert("delete");
     };
+
+    const [list, setList] = useState<Item[]>([]);
+    const getList = async () => {
+        const { data } = await axiosBase.get("/item");
+        setList(data);
+    };
+    useEffect(() => {
+        getList();
+    }, []);
+
     return (
         <Box padding={"80px 0px"} position="relative">
             <Button
@@ -52,7 +64,7 @@ export const ItemIndexPage = () => {
             <Heading pb={10} textAlign={"center"}>
                 Item Index
             </Heading>
-            <Box width={700} mx="auto">
+            <Box width={1000} mx="auto">
                 <TableContainer>
                     <Table variant="striped">
                         <Thead>
@@ -67,12 +79,12 @@ export const ItemIndexPage = () => {
                         </Thead>
                         <Tbody>
                             {[
-                                array.map((i) => (
-                                    <Tr key={i}>
-                                        <Td>inches</Td>
-                                        <Td>Category</Td>
-                                        <Td>millimetres (mm)</Td>
-                                        <Td isNumeric>25.4</Td>
+                                list.map((item) => (
+                                    <Tr key={item.id}>
+                                        <Td>{item.id}</Td>
+                                        <Td>{item.category.name}</Td>
+                                        <Td>{item.name}</Td>
+                                        <Td isNumeric>{item.price}</Td>
                                         <Td textAlign={"center"}>
                                             <EditIcon
                                                 onClick={handleClickEdit}
