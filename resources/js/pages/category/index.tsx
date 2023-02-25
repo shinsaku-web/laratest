@@ -18,8 +18,6 @@ import { axiosBase } from "../../apis/axiosBase";
 export const CategoryIndexPage = () => {
     const navigate = useNavigate();
 
-    const array = [...Array(100)].map((_, i) => i);
-
     const handleClickEdit = () => {
         alert("edit");
     };

@@ -19,8 +19,6 @@ import { Item } from "../../types/types";
 export const ItemIndexPage = () => {
     const navigate = useNavigate();
 
-    const array = [...Array(100)].map((_, i) => i);
-
     const handleClickEdit = () => {
         navigate("/item/edit/1");
     };

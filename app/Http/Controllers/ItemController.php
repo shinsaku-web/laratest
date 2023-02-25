@@ -21,6 +21,7 @@ class ItemController extends Controller
     {
         try {
             Item::create([
+                "category_id" => 1,
                 "name" => $request->name,
                 "price" => $request->price,
             ]);
