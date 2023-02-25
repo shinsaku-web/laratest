@@ -40,7 +40,7 @@ export const IndexPage = () => {
                 <Button
                     onClick={() => navigate("/category")}
                     size={"lg"}
-                    colorScheme="teal"
+                    colorScheme="blue"
                     variant="outline"
                 >
                     Category
