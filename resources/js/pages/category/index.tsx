@@ -10,18 +10,16 @@ import {
     Td,
     TableContainer,
 } from "@chakra-ui/react";
-import { AddIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons";
+import { AddIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
 import { Category } from "../../types/types";
 import { axiosBase } from "../../apis/axiosBase";
+import { Row } from "../../components/category/Row";
 
 export const CategoryIndexPage = () => {
     const navigate = useNavigate();
     const toast = useToast();
 
-    const handleClickEdit = () => {
-        alert("edit");
-    };
     const handleClickDelete = async (id: string) => {
         if (confirm("Really?")) {
             try {
@@ -93,26 +91,13 @@ export const CategoryIndexPage = () => {
                         <Tbody>
                             {[
                                 categories.map((category) => (
-                                    <Tr key={category.id}>
-                                        <Td>{category.id}</Td>
-                                        <Td>{category.name}</Td>
-                                        <Td textAlign={"center"}>
-                                            <EditIcon
-                                                onClick={handleClickEdit}
-                                                cursor={"pointer"}
-                                            />
-                                        </Td>
-                                        <Td textAlign={"center"}>
-                                            <DeleteIcon
-                                                onClick={() =>
-                                                    handleClickDelete(
-                                                        String(category.id)
-                                                    )
-                                                }
-                                                cursor={"pointer"}
-                                            />
-                                        </Td>
-                                    </Tr>
+                                    <Row
+                                        key={category.id}
+                                        id={String(category.id)}
+                                        name={category.name}
+                                        handleClickDelete={handleClickDelete}
+                                        getCategories={getCategories}
+                                    />
                                 )),
                             ]}
                         </Tbody>
