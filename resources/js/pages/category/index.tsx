@@ -1,4 +1,4 @@
-import { Box, Button, Heading } from "@chakra-ui/react";
+import { Box, Button, Heading, useToast } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import {
     Table,
@@ -17,12 +17,32 @@ import { axiosBase } from "../../apis/axiosBase";
 
 export const CategoryIndexPage = () => {
     const navigate = useNavigate();
+    const toast = useToast();
 
     const handleClickEdit = () => {
         alert("edit");
     };
-    const handleClickDelete = () => {
-        alert("delete");
+    const handleClickDelete = async (id: string) => {
+        if (confirm("Really?")) {
+            try {
+                await axiosBase.delete("/category/" + id);
+                await getCategories();
+                toast({
+                    title: `削除しました。`,
+                    status: "success",
+                    duration: 1000,
+                    isClosable: true,
+                });
+            } catch (error) {
+                console.error(error);
+                toast({
+                    title: `削除に失敗しました`,
+                    status: "error",
+                    duration: 1000,
+                    isClosable: true,
+                });
+            }
+        }
     };
     const [categories, setCategories] = useState<Category[]>([]);
     const getCategories = async () => {
@@ -84,7 +104,11 @@ export const CategoryIndexPage = () => {
                                         </Td>
                                         <Td textAlign={"center"}>
                                             <DeleteIcon
-                                                onClick={handleClickDelete}
+                                                onClick={() =>
+                                                    handleClickDelete(
+                                                        String(category.id)
+                                                    )
+                                                }
                                                 cursor={"pointer"}
                                             />
                                         </Td>

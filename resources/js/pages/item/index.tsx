@@ -29,6 +29,7 @@ export const ItemIndexPage = () => {
                 toast({
                     title: `削除しました。`,
                     status: "success",
+                    duration: 1000,
                     isClosable: true,
                 });
             } catch (error) {
@@ -36,6 +37,7 @@ export const ItemIndexPage = () => {
                 toast({
                     title: `削除に失敗しました`,
                     status: "error",
+                    duration: 1000,
                     isClosable: true,
                 });
             }

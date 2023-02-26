@@ -41,6 +41,7 @@ export const ItemEditPage = () => {
             toast({
                 title: `入力内容に不備があります`,
                 status: "error",
+                duration: 1000,
                 isClosable: true,
             });
             return;
@@ -52,6 +53,7 @@ export const ItemEditPage = () => {
             toast({
                 title: `更新に失敗しました`,
                 status: "error",
+                duration: 1000,
                 isClosable: true,
             });
         }

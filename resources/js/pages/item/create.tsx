@@ -40,6 +40,7 @@ export const ItemCreatePage = () => {
             toast({
                 title: `入力内容に不備があります`,
                 status: "error",
+                duration: 1000,
                 isClosable: true,
             });
             return;
@@ -51,6 +52,7 @@ export const ItemCreatePage = () => {
             toast({
                 title: `作成に失敗しました`,
                 status: "error",
+                duration: 1000,
                 isClosable: true,
             });
         }

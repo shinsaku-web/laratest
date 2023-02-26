@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use Exception;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -15,6 +16,9 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
+        if (!$request->name || strlen($request->name) > 255) {
+            throw new Exception("InValid");
+        }
         try {
             Category::create([
                 "name" => $request->name,
@@ -37,6 +41,9 @@ class CategoryController extends Controller
 
     public function update(Request $request, $id)
     {
+        if (!$request->name || strlen($request->name) > 255) {
+            throw new Exception("InValid");
+        }
         try {
             Category::findOrFail($id)->update([
                 "name" => $request->name,
